@@ -28,9 +28,6 @@ if (!port) {
     // otherwise, fallback to localhost 3001
     port = 3001;
 }
-server.get("/project/:id", async (req, res) => {
-    res.send({ project: await Project.findByPk(req.params.id) });
-});
 
 server.listen(port, () => {
     console.log("server running");
