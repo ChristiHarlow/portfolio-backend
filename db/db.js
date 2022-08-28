@@ -1,8 +1,27 @@
 const Sequelize = require("sequelize");
 
-const db = new Sequelize("postgres://christiharlow@localhost:5432/portfolio", {
-    logging: false,
-});
+let options = {};
+let databaseURL = process.env.DATABASE_URL;
+if (!databaseURL) {
+    // this means we're on localhost!
+    (databaseURL = "postgres://christiharlow@localhost:5432/portfolio"),
+        (options = {
+            logging: false,
+        });
+} else {
+    // we're not on localhost!
+    options = {
+        logging: false,
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false,
+            },
+        },
+    };
+}
+
+const db = new Sequelize(databaseURL, options);
 const Project = require("./Project")(db);
 
 const connectToDB = async () => {
@@ -12,7 +31,7 @@ const connectToDB = async () => {
         db.sync();
     } catch (error) {
         console.error(error);
-        console.error("Panic! DB problems... Arg!");
+        console.error("Panic!");
     }
 };
 
