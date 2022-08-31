@@ -5,6 +5,7 @@ server.use(
     cors({
         credentials: true,
         origin: [
+            "http://portfolio.christiaharlow.com",
             "http://localhost:3000",
             "http://localhost:3001",
             "https://christiharlow-portfolio-back.herokuapp.com",
