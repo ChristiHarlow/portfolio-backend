@@ -5,10 +5,9 @@ server.use(
     cors({
         credentials: true,
         origin: [
-            "http://portfolio.christiaharlow.com",
+            "https://christiaharlow.com",
+            "https://www.christiaharlow.com",
             "http://localhost:3000",
-            "http://localhost:3001",
-            ,
         ],
     })
 );
@@ -20,19 +19,17 @@ server.get("/", (req, res) => {
 });
 
 server.get("/projects", async (req, res) => {
-    res.send({ projects: await Project.findAll() });
+    res.send({
+        projects: await Project.findAll({
+            order: ["sort"],
+        }),
+    });
 });
 
-// if heroku, process.env.PORT will be provided
-let port = process.env.PORT;
-if (!port) {
-    // otherwise, fallback to localhost 3001
-    port = 3001;
+let port = 3001;
+if (process.env.PORT) {
+    port = process.env.PORT;
 }
-
-server.get("/project/:id", async (req, res) => {
-    res.send({ project: await Project.findByPk(req.params.id) });
-});
 
 server.listen(port, () => {
     console.log("server running");
