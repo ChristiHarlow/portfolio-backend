@@ -20,9 +20,7 @@ server.get("/", (req, res) => {
 
 server.get("/projects", async (req, res) => {
     res.send({
-        projects: await Project.findAll({
-            order: ["sort"],
-        }),
+        projects: await Project.findAll({}),
     });
 });
 
