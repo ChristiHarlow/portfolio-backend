@@ -12,7 +12,7 @@ if (process.env.RDS_HOSTNAME) {
 } else {
     console.log("Connecting to local database");
     // If we're running locally, use the local host connection
-    db = new Sequelize("postgres://christiharlow@localhost:5432/project", {
+    db = new Sequelize("postgres://christiharlow@localhost:5432/portfolio", {
         logging: false,
     });
 }

@@ -24,6 +24,10 @@ server.get("/projects", async (req, res) => {
     });
 });
 
+server.get("/project/:id", async (req, res) => {
+    res.send({ project: await Project.findByPk(req.params.id) });
+});
+
 let port = 3001;
 if (process.env.PORT) {
     port = process.env.PORT;
