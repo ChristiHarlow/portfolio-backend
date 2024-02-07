@@ -8,12 +8,9 @@ if (process.env.FLY_DATABASE_URL) {
 } else {
     console.log("Connecting to local database");
     // If we're running locally, use the local host connection
-    db = new Sequelize(
-        "postgres://christiharlow:Kiara219*@localhost:5432/project",
-        {
-            logging: false,
-        }
-    );
+    db = new Sequelize("postgres://christiharlow@localhost:5432/project", {
+        logging: false,
+    });
 }
 
 //const db = new Sequelize(databaseURL, options);
